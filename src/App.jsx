@@ -16,7 +16,7 @@ function Header({ onNav }) {
   return (
     <header className="header">
       <div className="brand" onClick={() => onNav('home')}>
-        <span className="pin">📍</span>
+        <img className="brand-logo" src="/icon.svg" alt="شعار خدمات قنا" />
         <span className="brand-name"><em>خدمات</em> <strong>قنا</strong></span>
       </div>
       <nav className="topnav">
@@ -230,12 +230,18 @@ function JoinBand({ onJoin }) {
   )
 }
 
-function Footer() {
+function Footer({ onNav }) {
   return (
     <footer className="footer">
-      <div className="brand"><span className="pin">📍</span><span className="brand-name"><em>خدمات</em> <strong>قنا</strong></span></div>
+      <div className="brand"><img className="brand-logo" src="/icon.svg" alt="شعار خدمات قنا" /><span className="brand-name"><em>خدمات</em> <strong>قنا</strong></span></div>
+      <nav>
+        <button onClick={() => onNav('home')}>الرئيسية</button>
+        <button onClick={() => onNav('categories')}>الأقسام</button>
+        <button onClick={() => onNav('join')}>سجّل كفني</button>
+        <button onClick={() => onNav('request')}>اطلب خدمة</button>
+      </nav>
       <p>منصة صعيدية بتجمع أهل قنا بأمهر الفنيين ومقدمي الخدمات في المحافظة.</p>
-      <p className="muted">نسخة إطلاق أولى · صُنعت في قنا ❤️ · <a href="https://tolzy-team.vercel.app/" target="_blank" rel="noreferrer">Tolzy Labs</a></p>
+      <p className="muted">© 2026 خدمات قنا · نسخة إطلاق أولى · من إنتاج <a href="https://genie-zeta-gold.vercel.app/" target="_blank" rel="noreferrer">Genie</a> · صُنعت في قنا ❤️</p>
     </footer>
   )
 }
@@ -571,7 +577,7 @@ export default function App() {
           onJoin={() => setModal({ type: 'join' })}
         />
       )}
-      <Footer />
+      <Footer onNav={go} />
       <BottomNav view={view} onNav={go} />
       {modal?.type === 'provider' && <ProviderModal p={modal.p} onClose={() => setModal(null)} onRequest={(p) => setModal({ type: 'request', p })} />}
       {modal?.type === 'request' && <RequestForm provider={modal.p} onClose={() => setModal(null)} />}
